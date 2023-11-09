@@ -1,9 +1,9 @@
 package christmas.controller;
 
 import christmas.domain.Date;
+import christmas.domain.menu.MenuCategory;
 import christmas.view.InputView;
 import christmas.view.OutputView;
-import java.awt.Menu;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -23,6 +23,11 @@ public class ChristmasPromotion {
         Map<String, String> menu = getOrder(input.readOrder());
         output.printDate(date);
         output.printOrder(menu);
+        for (String menuItem : menu.keySet()) {
+            if (!MenuCategory.isMenuValid(menuItem)) {
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }
+        }
     }
 
     private Date getDate() {
