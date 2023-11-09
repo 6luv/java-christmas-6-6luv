@@ -17,6 +17,7 @@ public class ChristmasPromotion {
     public void run() {
         output.printStart();
         Date date = getDate();
+        String order = input.readOrder();
     }
 
     private Date getDate() {
