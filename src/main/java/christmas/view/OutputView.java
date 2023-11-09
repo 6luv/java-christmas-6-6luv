@@ -1,10 +1,15 @@
 package christmas.view;
 
+import christmas.domain.Date;
 import java.util.Map;
 
 public class OutputView {
     public void printStart() {
         System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
+    }
+
+    public void printDate(Date date) {
+        System.out.printf("12월 %d월에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n", date.getDay());
     }
 
     public void printOrder(Map<String, String> order) {

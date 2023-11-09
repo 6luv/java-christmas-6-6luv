@@ -21,6 +21,7 @@ public class ChristmasPromotion {
         output.printStart();
         Date date = getDate();
         Map<String, String> menu = getOrder(input.readOrder());
+        output.printDate(date);
         output.printOrder(menu);
     }
 
