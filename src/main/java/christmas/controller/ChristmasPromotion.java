@@ -20,14 +20,10 @@ public class ChristmasPromotion {
     public void run() {
         output.printStart();
         Date date = getDate();
-        Map<String, String> menu = getOrder(input.readOrder());
+        Map<String, String> order = getOrder(input.readOrder());
         output.printDate(date);
-        output.printOrder(menu);
-        for (String menuItem : menu.keySet()) {
-            if (!MenuCategory.isMenuValid(menuItem)) {
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-            }
-        }
+        output.printOrder(order);
+        checkValidMenu(order);
     }
 
     private Date getDate() {
@@ -54,5 +50,13 @@ public class ChristmasPromotion {
             menu.put(singleMenu[0], singleMenu[1]);
         }
         return menu;
+    }
+
+    private void checkValidMenu(Map<String, String> order) {
+        for (String menu : order.keySet()) {
+            if (!MenuCategory.isMenuValid(menu)) {
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }
+        }
     }
 }
