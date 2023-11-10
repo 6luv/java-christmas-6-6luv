@@ -28,4 +28,9 @@ public enum Dessert implements MenuItem {
     public MenuCategory getCategory() {
         return category;
     }
+
+    @Override
+    public boolean hasMenu(String menuName) {
+        return name.contains(menuName);
+    }
 }

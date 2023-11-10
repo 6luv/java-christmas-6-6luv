@@ -21,6 +21,6 @@ public enum MenuCategory {
 
     private boolean isMenuInCategory(String menuName) {
         return Arrays.stream(menuClass.getEnumConstants())
-                .anyMatch(menuItem -> menuItem.getName().equals(menuName));
+                .anyMatch(menuItem -> menuItem.hasMenu(menuName));
     }
 }

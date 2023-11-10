@@ -4,4 +4,5 @@ public interface MenuItem {
     String getName();
     int getPrice();
     MenuCategory getCategory();
+    boolean hasMenu(String menuName);
 }
