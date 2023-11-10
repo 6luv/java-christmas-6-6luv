@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.domain.Date;
 import christmas.domain.discount.DdayDiscount;
+import christmas.domain.discount.WeekdayDiscount;
 import christmas.domain.menu.MenuCategory;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -29,6 +30,7 @@ public class ChristmasPromotion {
         output.printOriginalOrderAmount(originalOrderAmount);
 
         DdayDiscount.calculateDiscount(date.getDay());
+        WeekdayDiscount.calculateDiscount(date.getDay(), order);
     }
 
     private Date getDate() {
