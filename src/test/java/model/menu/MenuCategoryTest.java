@@ -1,7 +1,9 @@
 package model.menu;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import christmas.domain.menu.MenuCategory;
 import org.junit.jupiter.api.DisplayName;
@@ -17,8 +19,7 @@ public class MenuCategoryTest {
     })
     @DisplayName("메뉴 이름 유효성 성공 테스트")
     void isMenuValidTest(String menuName) {
-        assertDoesNotThrow(
-                () -> MenuCategory.isMenuValid(menuName));
+        assertTrue(() -> MenuCategory.isMenuValid(menuName));
     }
 
     @ParameterizedTest
@@ -29,7 +30,6 @@ public class MenuCategoryTest {
     })
     @DisplayName("메뉴 이름 유효성 실패 테스트")
     void isMenuInValidTest(String menuName) {
-        assertThrows(IllegalArgumentException.class,
-                (() -> MenuCategory.isMenuValid(menuName)));
+        assertFalse(MenuCategory.isMenuValid(menuName));
     }
 }
