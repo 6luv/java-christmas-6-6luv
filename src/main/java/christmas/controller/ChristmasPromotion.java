@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.domain.Date;
 import christmas.domain.discount.DdayDiscount;
+import christmas.domain.discount.DiscountManager;
 import christmas.domain.discount.SpecialDiscount;
 import christmas.domain.discount.WeekdayDiscount;
 import christmas.domain.discount.WeekendDiscount;
@@ -31,10 +32,10 @@ public class ChristmasPromotion {
         int originalOrderAmount = MenuCategory.calculatePrice(order);
         output.printOriginalOrderAmount(originalOrderAmount);
 
-        DdayDiscount.calculateDiscount(date.getDay());
-        WeekdayDiscount.calculateDiscount(date.getDay(), order);
-        WeekendDiscount.calculateDiscount(date.getDay(), order);
-        SpecialDiscount.calculateDiscount(date.getDay());
+        int totalDiscount = 0;
+        for (DiscountManager discount : DiscountManager.values()) {
+            totalDiscount += discount.calculateDiscount(date.getDay(), order);
+        }
     }
 
     private Date getDate() {

@@ -4,7 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class SpecialDiscount {
-    public static int calculateDiscount(int date) {
+    public int calculateDiscount(int date) {
         LocalDate localDate = LocalDate.of(2023, 12, date);
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
@@ -14,7 +14,7 @@ public class SpecialDiscount {
         return 0;
     }
 
-    private static boolean isSpecial(DayOfWeek dayOfWeek, int date) {
+    private boolean isSpecial(DayOfWeek dayOfWeek, int date) {
         return dayOfWeek.getValue() == DayOfWeek.SUNDAY.getValue()
                 || date == 25;
     }

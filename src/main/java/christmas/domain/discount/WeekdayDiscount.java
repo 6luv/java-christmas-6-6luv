@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class WeekdayDiscount {
-    public static int calculateDiscount(int date, Map<String, String> order) {
+    public int calculateDiscount(int date, Map<String, String> order) {
         LocalDate localDate = LocalDate.of(2023, 12, date);
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
@@ -25,7 +25,7 @@ public class WeekdayDiscount {
         return dessertCount * 2023;
     }
 
-    private static boolean isWeekday(DayOfWeek dayOfWeek) {
+    private boolean isWeekday(DayOfWeek dayOfWeek) {
         return dayOfWeek.getValue() >= DayOfWeek.SUNDAY.getValue()
                 || dayOfWeek.getValue() <= DayOfWeek.THURSDAY.getValue();
     }
