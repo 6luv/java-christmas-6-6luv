@@ -18,4 +18,9 @@ public class OutputView {
             System.out.printf("%s %s개\n", menuItem, order.get(menuItem));
         }
     }
+
+    public void printOriginalOrderAmount(int originalOrderAmount) {
+        System.out.println("<할인 전 총주문 금액>");
+        System.out.printf("%,d원\n", originalOrderAmount);
+    }
 }
