@@ -24,6 +24,7 @@ public class ChristmasPromotion {
         output.printDate(date);
         output.printOrder(order);
         checkValidMenu(order);
+        MenuCategory.calculatePrice(order);
     }
 
     private Date getDate() {

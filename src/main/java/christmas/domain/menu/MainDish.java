@@ -17,16 +17,6 @@ public enum MainDish implements MenuItem {
     }
 
     @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public int getPrice() {
-        return price;
-    }
-
-    @Override
     public MenuCategory getCategory() {
         return category;
     }
@@ -34,5 +24,10 @@ public enum MainDish implements MenuItem {
     @Override
     public boolean hasMenu(String menuName) {
         return name.contains(menuName);
+    }
+
+    @Override
+    public int calculatePrice(String quantity) {
+        return price * Integer.parseInt(quantity);
     }
 }
