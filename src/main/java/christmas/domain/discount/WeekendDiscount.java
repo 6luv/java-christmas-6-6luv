@@ -1,8 +1,6 @@
 package christmas.domain.discount;
 
 import christmas.domain.menu.MainDish;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -11,10 +9,8 @@ public class WeekendDiscount implements DiscountCalculator {
     public int calculateDiscount(DiscountInfo discountInfo) {
         int date = discountInfo.date();
         Map<String, String> order = discountInfo.order();
-        LocalDate localDate = LocalDate.of(2023, 12, date);
-        DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
-        if (!isWeekend(dayOfWeek)) {
+        if (!isWeekend(date)) {
             return 0;
         }
         int mainDishCount = order.entrySet()
@@ -26,10 +22,5 @@ public class WeekendDiscount implements DiscountCalculator {
                 .orElse(0);
 
         return mainDishCount * 2023;
-    }
-
-    private boolean isWeekend(DayOfWeek dayOfWeek) {
-        return dayOfWeek.getValue() == DayOfWeek.FRIDAY.getValue()
-                || dayOfWeek.getValue() == DayOfWeek.SATURDAY.getValue();
     }
 }
