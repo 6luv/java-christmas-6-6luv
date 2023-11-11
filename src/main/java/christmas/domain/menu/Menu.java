@@ -37,6 +37,10 @@ public class Menu {
         return 1 <= menuCount && menuCount <= 20;
     }
 
+    public String getMenuName() {
+        return menuName;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(menuName);
