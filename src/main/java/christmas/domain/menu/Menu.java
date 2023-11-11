@@ -1,6 +1,7 @@
 package christmas.domain.menu;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Menu {
     private final String menuName;
@@ -34,5 +35,22 @@ public class Menu {
 
     private boolean isMenuCountValidRange(int menuCount) {
         return 1 <= menuCount && menuCount <= 20;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(menuName);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Menu menu = (Menu) obj;
+        return Objects.equals(menuName, menu.menuName);
     }
 }
