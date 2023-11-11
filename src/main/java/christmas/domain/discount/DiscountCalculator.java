@@ -19,6 +19,12 @@ interface DiscountCalculator {
                 || dayOfWeek.getValue() == DayOfWeek.SATURDAY.getValue();
     }
 
+    default boolean isSpecial(int date) {
+        DayOfWeek dayOfWeek = convertDayOfWeek(date);
+        return dayOfWeek.getValue() == DayOfWeek.SUNDAY.getValue()
+                || date == 25;
+    }
+
     private DayOfWeek convertDayOfWeek(int date) {
         LocalDate localDate = LocalDate.of(2023, 12, date);
         return localDate.getDayOfWeek();
