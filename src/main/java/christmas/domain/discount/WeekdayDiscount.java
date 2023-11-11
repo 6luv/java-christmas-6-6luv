@@ -6,8 +6,11 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Map;
 
-public class WeekdayDiscount {
-    public int calculateDiscount(int date, Map<String, String> order) {
+public class WeekdayDiscount implements DiscountCalculator {
+    @Override
+    public int calculateDiscount(DiscountInfo discountInfo) {
+        int date = discountInfo.date();
+        Map<String, String> order = discountInfo.order();
         LocalDate localDate = LocalDate.of(2023, 12, date);
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 

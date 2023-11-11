@@ -3,9 +3,11 @@ package christmas.domain.discount;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-public class SpecialDiscount {
-    public int calculateDiscount(int date) {
-        LocalDate localDate = LocalDate.of(2023, 12, date);
+public class SpecialDiscount implements DiscountCalculator {
+    @Override
+    public int calculateDiscount(DiscountInfo discountInfo) {
+        int date = discountInfo.date();
+        LocalDate localDate = LocalDate.of(2023, 12, discountInfo.date());
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
         if (isSpecial(dayOfWeek, date)) {

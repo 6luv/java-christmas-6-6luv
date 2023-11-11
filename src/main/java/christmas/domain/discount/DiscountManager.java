@@ -1,12 +1,10 @@
 package christmas.domain.discount;
 
-import java.util.Map;
-
-public enum DiscountManager {
-    D_DAY((date, order) -> new DdayDiscount().calculateDiscount(date)),
-    SPECIAL((date, order) -> new SpecialDiscount().calculateDiscount(date)),
-    WEEKDAY((date, order) -> new WeekdayDiscount().calculateDiscount(date, order)),
-    WEEKEND((date, order) -> new WeekendDiscount().calculateDiscount(date, order));
+public enum DiscountManager implements DiscountCalculator {
+    D_DAY(discountInfo -> new DdayDiscount().calculateDiscount(discountInfo)),
+    SPECIAL(discountInfo -> new SpecialDiscount().calculateDiscount(discountInfo)),
+    WEEKDAY(discountInfo -> new WeekdayDiscount().calculateDiscount(discountInfo)),
+    WEEKEND(discountInfo -> new WeekendDiscount().calculateDiscount(discountInfo));
 
     private final DiscountCalculator discountCalculator;
 
@@ -14,7 +12,8 @@ public enum DiscountManager {
         this.discountCalculator = discountCalculator;
     }
 
-    public int calculateDiscount(int date, Map<String, String> order) {
-        return discountCalculator.calculateDiscount(date, order);
+    @Override
+    public int calculateDiscount(DiscountInfo discountInfo) {
+        return discountCalculator.calculateDiscount(discountInfo);
     }
 }
