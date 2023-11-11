@@ -33,6 +33,6 @@ public class Menu {
     }
 
     private boolean isMenuCountValidRange(int menuCount) {
-        return 1 <= menuCount && menuCount <= 31;
+        return 1 <= menuCount && menuCount <= 20;
     }
 }
