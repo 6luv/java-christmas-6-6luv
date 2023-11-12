@@ -1,5 +1,7 @@
 package christmas.domain.menu;
 
+import christmas.domain.Order;
+
 public enum MainDish implements MenuItem {
     T_BONE_STEAK("티본스테이크", 55_000, MenuCategory.MAIN_DISH),
     BARBECUE_RIB("바비큐립", 54_000, MenuCategory.MAIN_DISH),
@@ -14,6 +16,14 @@ public enum MainDish implements MenuItem {
         this.name = name;
         this.price = price;
         this.category = category;
+    }
+
+    public static int calculateMainDishCount(Order order) {
+        return order.getOrder()
+                .stream()
+                .filter(menu -> menu.getCategory() == MenuCategory.MAIN_DISH)
+                .mapToInt(Menu::getMenuCount)
+                .sum();
     }
 
     @Override
