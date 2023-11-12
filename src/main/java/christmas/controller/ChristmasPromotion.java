@@ -20,7 +20,7 @@ public class ChristmasPromotion {
     public void run() {
         output.printStart();
         Date date = getDate();
-        Order order = new Order(getOrder(input.readOrder()));
+        Order order = getOrder();
         output.printDate(date);
     }
 
@@ -34,7 +34,18 @@ public class ChristmasPromotion {
         }
     }
 
-    private List<Menu> getOrder(String order) {
+    private Order getOrder() {
+        while (true) {
+            try {
+                String readOrder = input.readOrder();
+                return new Order(parseOrder(readOrder));
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private List<Menu> parseOrder(String order) {
         return Arrays.stream(order.split(","))
                 .map(menuItem -> menuItem.split("-"))
                 .map(menu -> new Menu(menu[0], Integer.parseInt(menu[1])))
