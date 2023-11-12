@@ -16,6 +16,14 @@ public enum Dessert implements MenuItem {
         this.category = category;
     }
 
+    public static int calculateDessertCount(Order order) {
+        return order.getOrder()
+                .stream()
+                .filter(menu -> menu.getCategory() == MenuCategory.DESSERT)
+                .mapToInt(Menu::getMenuCount)
+                .sum();
+    }
+
     @Override
     public MenuCategory getCategory() {
         return category;
