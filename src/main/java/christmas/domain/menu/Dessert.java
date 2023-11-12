@@ -1,5 +1,7 @@
 package christmas.domain.menu;
 
+import christmas.domain.Order;
+
 public enum Dessert implements MenuItem {
     CHOCOLATE_CAKE("초코케이크", 15_000, MenuCategory.DESSERT),
     ICE_CREAM("아이스크림", 5_000, MenuCategory.DESSERT);
@@ -22,10 +24,5 @@ public enum Dessert implements MenuItem {
     @Override
     public boolean hasMenu(String menuName) {
         return name.contains(menuName);
-    }
-
-    @Override
-    public int calculatePrice(String quantity) {
-        return price * Integer.parseInt(quantity);
     }
 }

@@ -25,9 +25,4 @@ public enum MainDish implements MenuItem {
     public boolean hasMenu(String menuName) {
         return name.contains(menuName);
     }
-
-    @Override
-    public int calculatePrice(String quantity) {
-        return price * Integer.parseInt(quantity);
-    }
 }
