@@ -28,6 +28,12 @@ public class Order {
         }
     }
 
+    public int getTotalPrice() {
+        return order.stream()
+                .mapToInt(Menu::getMenuPrice)
+                .sum();
+    }
+
     public List<Menu> getOrder() {
         return order.stream()
                 .map(menu -> new Menu(menu.getMenuName(), menu.getMenuCount(), menu.getCategory()))
