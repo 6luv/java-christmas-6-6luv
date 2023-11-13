@@ -3,6 +3,7 @@ package christmas.domain.benefit.giveaway;
 import christmas.domain.benefit.BenefitCalculator;
 import christmas.domain.benefit.BenefitContext;
 import christmas.domain.benefit.BenefitInfo;
+import christmas.domain.benefit.BenefitType;
 
 public class Champagne implements BenefitCalculator {
     private static final String GIVEAWAY_NAME = "샴페인";
@@ -14,6 +15,6 @@ public class Champagne implements BenefitCalculator {
         if (context.getTotalPrice() >= 120000) {
             price = 25000;
         }
-        return new BenefitInfo("증정 이벤트", price);
+        return new BenefitInfo(BenefitType.GIVEAWAY, price);
     }
 }

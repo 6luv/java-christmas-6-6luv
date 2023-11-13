@@ -3,6 +3,7 @@ package christmas.domain.benefit.discount;
 import christmas.domain.benefit.BenefitCalculator;
 import christmas.domain.benefit.BenefitContext;
 import christmas.domain.benefit.BenefitInfo;
+import christmas.domain.benefit.BenefitType;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
@@ -17,7 +18,7 @@ public class WeekdayDiscount implements BenefitCalculator {
         if (isWeekday(dayOfWeek)) {
             discount = context.getDessertCount() * 2023;
         }
-        return new BenefitInfo("평일 할인", discount);
+        return new BenefitInfo(BenefitType.WEEKDAY, discount);
     }
 
     private boolean isWeekday(DayOfWeek dayOfWeek) {
