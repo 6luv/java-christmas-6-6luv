@@ -4,6 +4,7 @@ import christmas.domain.menu.Beverage;
 import christmas.domain.menu.Menu;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Order {
     private final List<Menu> order;
@@ -25,5 +26,11 @@ public class Order {
         if (Beverage.isEveryMenuBeverage(order)) {
             throw new IllegalArgumentException("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
         }
+    }
+
+    public List<Menu> getOrder() {
+        return order.stream()
+                .map(menu -> new Menu(menu.getMenuName(), menu.getMenuCount(), menu.getCategory()))
+                .collect(Collectors.toUnmodifiableList());
     }
 }
