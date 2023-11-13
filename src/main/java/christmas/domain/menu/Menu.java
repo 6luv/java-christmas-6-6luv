@@ -14,6 +14,16 @@ public class Menu {
         this.category = category;
     }
 
+    public int getMenuPrice() {
+        int price = 0;
+        for (MenuItem menuItem : category.getMenuClass().getEnumConstants()) {
+            if (menuItem.hasMenu(name)) {
+                price = menuItem.getPrice() * quantity;
+            }
+        }
+        return price;
+    }
+
     private void validateMenuCount(int menuCount) {
         if (!isMenuCountValidRange(menuCount)) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
