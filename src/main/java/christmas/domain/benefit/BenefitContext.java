@@ -1,11 +1,11 @@
-package christmas.domain.discount;
+package christmas.domain.benefit;
 
-public class DiscountContext {
+public class BenefitContext {
     private final int date;
     private final int dessertCount;
     private final int mainDishCount;
 
-    public DiscountContext(int date, int dessertCount, int mainDishCount) {
+    public BenefitContext(int date, int dessertCount, int mainDishCount) {
         this.date = date;
         this.dessertCount = dessertCount;
         this.mainDishCount = mainDishCount;

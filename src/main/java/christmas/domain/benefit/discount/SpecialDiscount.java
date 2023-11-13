@@ -1,11 +1,14 @@
-package christmas.domain.discount;
+package christmas.domain.benefit.discount;
 
+import christmas.domain.benefit.BenefitCalculator;
+import christmas.domain.benefit.BenefitContext;
+import christmas.domain.benefit.BenefitInfo;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-public class SpecialDiscount implements DiscountCalculator {
+public class SpecialDiscount implements BenefitCalculator {
     @Override
-    public DiscountInfo calculateDiscount(DiscountContext context) {
+    public BenefitInfo calculateBenefit(BenefitContext context) {
         LocalDate localDate = LocalDate.of(2023, 12, context.getDate());
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
@@ -14,7 +17,7 @@ public class SpecialDiscount implements DiscountCalculator {
         if (isSpecial(dayOfWeek) || isChristmas(context.getDate())) {
             discount = 1000;
         }
-        return new DiscountInfo("특별 할인", discount);
+        return new BenefitInfo("특별 할인", discount);
     }
 
     private boolean isSpecial(DayOfWeek dayOfWeek) {
