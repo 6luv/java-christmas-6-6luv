@@ -4,8 +4,10 @@ import christmas.domain.benefit.BenefitCalculator;
 import christmas.domain.benefit.BenefitContext;
 import christmas.domain.benefit.BenefitInfo;
 import christmas.domain.benefit.BenefitType;
+import java.util.stream.Stream;
 
 public class Champagne implements BenefitCalculator {
+    private static final String GIVEAWAY_FORMAT = "%s %d개";
     private static final String GIVEAWAY_NAME = "샴페인";
     private static final int GIVEAWAY_QUALITY = 1;
 
@@ -16,5 +18,13 @@ public class Champagne implements BenefitCalculator {
             price = 25000;
         }
         return new BenefitInfo(BenefitType.GIVEAWAY, price);
+    }
+
+    public static String getGiveaway(int totalPrice) {
+        return Stream.of(totalPrice)
+                .filter(price -> price >= 120000)
+                .map(giveaway -> String.format(GIVEAWAY_FORMAT, GIVEAWAY_NAME, GIVEAWAY_QUALITY))
+                .findFirst()
+                .orElse("없음");
     }
 }

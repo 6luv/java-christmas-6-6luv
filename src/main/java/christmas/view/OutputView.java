@@ -6,7 +6,6 @@ import christmas.domain.menu.Menu;
 import java.util.List;
 
 public class OutputView {
-
     public void printStart() {
         System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
     }
@@ -25,6 +24,11 @@ public class OutputView {
     public void printTotalPrice(int totalPrice) {
         System.out.println("\n<할인 전 총주문 금액>");
         System.out.printf("%,d원\n", totalPrice);
+    }
+
+    public void printGiveaway(String giveaway) {
+        System.out.println("<증정 메뉴>");
+        System.out.println(giveaway);
     }
 
     public void printBenefits(List<BenefitInfo> benefits) {
