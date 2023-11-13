@@ -3,15 +3,15 @@ package christmas.domain.menu;
 import java.util.Objects;
 
 public class Menu {
-    private final String menuName;
-    private final int menuCount;
-    private final MenuCategory menuCategory;
+    private final String name;
+    private final int quantity;
+    private final MenuCategory category;
 
-    public Menu(String menuName, int menuCount, MenuCategory menuCategory) {
-        validateMenuCount(menuCount);
-        this.menuName = menuName;
-        this.menuCount = menuCount;
-        this.menuCategory = menuCategory;
+    public Menu(String name, int quantity, MenuCategory category) {
+        validateMenuCount(quantity);
+        this.name = name;
+        this.quantity = quantity;
+        this.category = category;
     }
 
     private void validateMenuCount(int menuCount) {
@@ -25,20 +25,20 @@ public class Menu {
     }
 
     public String getMenuName() {
-        return menuName;
+        return name;
     }
 
     public int getMenuCount() {
-        return menuCount;
+        return quantity;
     }
 
     public MenuCategory getCategory() {
-        return menuCategory;
+        return category;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(menuName);
+        return Objects.hash(name);
     }
 
     @Override
@@ -50,6 +50,6 @@ public class Menu {
             return false;
         }
         Menu menu = (Menu) obj;
-        return Objects.equals(menuName, menu.menuName);
+        return Objects.equals(name, menu.name);
     }
 }
