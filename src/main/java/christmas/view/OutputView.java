@@ -20,8 +20,8 @@ public class OutputView {
         }
     }
 
-    public void printOriginalOrderAmount(int originalOrderAmount) {
-        System.out.println("<할인 전 총주문 금액>");
-        System.out.printf("%,d원\n", originalOrderAmount);
+    public void printTotalPrice(int totalPrice) {
+        System.out.println("\n<할인 전 총주문 금액>");
+        System.out.printf("%,d원\n", totalPrice);
     }
 }
