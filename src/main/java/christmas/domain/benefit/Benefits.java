@@ -35,6 +35,13 @@ public class Benefits {
         ));
     }
 
+    public static int calculateBenefitAmount(Benefits benefits) {
+        return benefits.getBenefits()
+                .stream()
+                .mapToInt(BenefitInfo::getAmount)
+                .sum();
+    }
+
     public List<BenefitInfo> getBenefits() {
         return benefitInfos.stream()
                 .map(info -> new BenefitInfo(info.getBenefitType(), info.getAmount()))
