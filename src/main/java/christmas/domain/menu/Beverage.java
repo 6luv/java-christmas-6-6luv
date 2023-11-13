@@ -2,8 +2,6 @@ package christmas.domain.menu;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public enum Beverage implements MenuItem {
     ZERO_COLA("제로콜라", 3_000, MenuCategory.BEVERAGE),
@@ -21,16 +19,9 @@ public enum Beverage implements MenuItem {
     }
 
     public static boolean isEveryMenuBeverage(List<Menu> order) {
-        Set<String> beverageNames = Arrays.stream(Beverage.values())
-                .map(Beverage::getMenuName)
-                .collect(Collectors.toSet());
-
         return order.stream()
-                .allMatch(menu -> beverageNames.contains(menu.getMenuName()));
-    }
-
-    public String getMenuName() {
-        return name;
+                .allMatch(menu -> Arrays.stream(Beverage.values())
+                        .anyMatch(beverage -> beverage.name.equals(menu.getMenuName())));
     }
 
     @Override
