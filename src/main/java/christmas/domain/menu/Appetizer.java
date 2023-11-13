@@ -16,6 +16,11 @@ public enum Appetizer implements MenuItem {
     }
 
     @Override
+    public int getPrice() {
+        return price;
+    }
+
+    @Override
     public MenuCategory getCategory() {
         return category;
     }
