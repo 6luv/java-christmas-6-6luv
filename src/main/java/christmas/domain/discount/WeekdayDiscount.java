@@ -17,7 +17,7 @@ public class WeekdayDiscount implements DiscountCalculator {
         return new DiscountInfo("평일 할인", discount);
     }
 
-    private static boolean isWeekday(DayOfWeek dayOfWeek) {
+    private boolean isWeekday(DayOfWeek dayOfWeek) {
         return dayOfWeek.getValue() >= DayOfWeek.SUNDAY.getValue()
                 || dayOfWeek.getValue() <= DayOfWeek.THURSDAY.getValue();
     }
