@@ -1,7 +1,8 @@
 package christmas.view;
 
 import christmas.domain.Date;
-import java.util.Map;
+import christmas.domain.menu.Menu;
+import java.util.List;
 
 public class OutputView {
     public void printStart() {
@@ -12,10 +13,10 @@ public class OutputView {
         System.out.printf("12월 %d월에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n", date.getDay());
     }
 
-    public void printOrder(Map<String, String> order) {
+    public void printOrder(List<Menu> order) {
         System.out.println("<주문 메뉴>");
-        for (String menuItem : order.keySet()) {
-            System.out.printf("%s %s개\n", menuItem, order.get(menuItem));
+        for (Menu menu : order) {
+            System.out.printf("%s %d개\n", menu.getMenuName(), menu.getMenuCount());
         }
     }
 
