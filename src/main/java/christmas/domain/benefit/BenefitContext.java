@@ -4,11 +4,13 @@ public class BenefitContext {
     private final int date;
     private final int dessertCount;
     private final int mainDishCount;
+    private final int totalPrice;
 
-    public BenefitContext(int date, int dessertCount, int mainDishCount) {
+    public BenefitContext(int date, int dessertCount, int mainDishCount, int totalPrice) {
         this.date = date;
         this.dessertCount = dessertCount;
         this.mainDishCount = mainDishCount;
+        this.totalPrice = totalPrice;
     }
 
     public int getDate() {
@@ -21,5 +23,9 @@ public class BenefitContext {
 
     public int getMainDishCount() {
         return mainDishCount;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
     }
 }
