@@ -4,6 +4,7 @@ import christmas.domain.benefit.discount.DdayDiscount;
 import christmas.domain.benefit.discount.SpecialDiscount;
 import christmas.domain.benefit.discount.WeekdayDiscount;
 import christmas.domain.benefit.discount.WeekendDiscount;
+import christmas.domain.benefit.giveaway.Champagne;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,28 +12,32 @@ import java.util.stream.Collectors;
 public class Benefits {
     private final List<BenefitInfo> benefitInfos;
 
-    public Benefits(List<BenefitInfo> discountInfos) {
-        this.benefitInfos = discountInfos;
+    private Benefits(List<BenefitInfo> benefitInfos) {
+        this.benefitInfos = benefitInfos;
     }
 
-    public static Benefits calculateDiscounts(BenefitContext context) {
-        List<BenefitInfo> calculatedDiscounts = new ArrayList<>();
-
-        DdayDiscount ddayDiscount = new DdayDiscount();
-        WeekdayDiscount weekdayDiscount = new WeekdayDiscount();
-        WeekendDiscount weekendDiscount = new WeekendDiscount();
-        SpecialDiscount specialDiscount = new SpecialDiscount();
-
-        calculatedDiscounts.add(ddayDiscount.calculateBenefit(context));
-        calculatedDiscounts.add(weekdayDiscount.calculateBenefit(context));
-        calculatedDiscounts.add(weekendDiscount.calculateBenefit(context));
-        calculatedDiscounts.add(specialDiscount.calculateBenefit(context));
-        return new Benefits(calculatedDiscounts);
+    public static Benefits calculateBenefits(BenefitContext context) {
+        List<BenefitCalculator> calculators = initCalculators();
+        List<BenefitInfo> benefits = calculators.stream()
+                .map(calculator -> calculator.calculateBenefit(context))
+                .filter(benefitInfo -> benefitInfo.getAmount() != 0)
+                .collect(Collectors.toUnmodifiableList());
+        return new Benefits(benefits);
     }
 
-    public List<BenefitInfo> getDiscounts() {
+    private static List<BenefitCalculator> initCalculators() {
+        return new ArrayList<>(List.of(
+                new DdayDiscount(),
+                new WeekdayDiscount(),
+                new WeekendDiscount(),
+                new SpecialDiscount(),
+                new Champagne()
+        ));
+    }
+
+    public List<BenefitInfo> getBenefits() {
         return benefitInfos.stream()
-                .map(discount -> new BenefitInfo(discount.getBenefitType(), discount.getAmount()))
+                .map(info -> new BenefitInfo(info.getBenefitType(), info.getAmount()))
                 .collect(Collectors.toUnmodifiableList());
     }
 }
