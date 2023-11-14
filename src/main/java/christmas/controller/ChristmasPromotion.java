@@ -31,8 +31,9 @@ public class ChristmasPromotion {
     public void run() {
         output.printStart();
         Date date = getDate();
-        Order order = processOrder();
+        Order order = getOrder();
         output.printDate(date);
+        output.printOrder(order.getOrder());
 
         int totalPrice = processTotalPrice(order);
         BenefitContext context = generateContext(order, date.getDay(), totalPrice);
@@ -53,12 +54,6 @@ public class ChristmasPromotion {
         return getFromInput(() -> new Order(parseOrder(input.readOrder())));
     }
 
-    private Order processOrder() {
-        Order order = getOrder();
-        output.printOrder(order.getOrder());
-        return order;
-    }
-
     private List<Menu> parseOrder(String order) {
         return Arrays.stream(order.split(MENU_ITEM_SEPARATOR))
                 .map(this::parseMenuItem)
@@ -71,8 +66,8 @@ public class ChristmasPromotion {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
 
-        String menuName = menuComponents[0].trim();
-        int quantity = Integer.parseInt(menuComponents[1].trim());
+        String menuName = menuComponents[0];
+        int quantity = Integer.parseInt(menuComponents[1]);
         MenuCategory category = MenuCategory.determineMenuCategory(menuName);
         return new Menu(menuName, quantity, category);
     }
