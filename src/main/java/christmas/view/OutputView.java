@@ -51,4 +51,9 @@ public class OutputView {
         System.out.println("<총혜택 금액>");
         System.out.printf(BENEFIT_AMOUNT_FORMAT, benefitsAmount);
     }
+
+    public void printEstimatedAmount(int estimatedAmount) {
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.printf("%,d원", estimatedAmount);
+    }
 }
