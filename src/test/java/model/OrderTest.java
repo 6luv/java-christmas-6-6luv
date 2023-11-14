@@ -1,5 +1,6 @@
 package model;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -29,5 +30,18 @@ public class OrderTest {
         order.add(new Menu("제로콜라", 1, MenuCategory.BEVERAGE));
         order.add(new Menu("해산물파스타", 2, MenuCategory.MAIN_DISH));
         assertDoesNotThrow(() -> new Order(order));
+    }
+
+    @Test
+    @DisplayName("모든 메뉴가 음료인지 확인 테스트")
+    void isEveryMenuBeverage() {
+        List<Menu> order = List.of(
+                new Menu("제로콜라", 1, MenuCategory.BEVERAGE),
+                new Menu("레드와인", 2, MenuCategory.BEVERAGE)
+        );
+
+        assertThatThrownBy(() -> new Order(order))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
     }
 }
