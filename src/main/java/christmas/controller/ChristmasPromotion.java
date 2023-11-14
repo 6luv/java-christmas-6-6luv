@@ -37,12 +37,9 @@ public class ChristmasPromotion {
 
         int totalPrice = processTotalPrice(order);
         BenefitContext context = generateContext(order, date.getDay(), totalPrice);
-        output.printGiveaway(getGiveawayPrice(context));
         int benefitsAmount = processBenefit(context);
 
-        int estimatedAmount = totalPrice - (benefitsAmount - getGiveawayPrice(context));
-        output.printEstimatedAmount(estimatedAmount);
-
+        processEstimatedAmount(totalPrice, benefitsAmount, context);
         EventBadge eventBadge = EventBadge.determineBadgeType(benefitsAmount);
         output.printEventBadge(eventBadge.getBadge());
     }
@@ -92,6 +89,13 @@ public class ChristmasPromotion {
         int benefitsAmount = Benefits.calculateBenefitAmount(benefits);
         output.printBenefitAmount(benefitsAmount);
         return benefitsAmount;
+    }
+
+    private void processEstimatedAmount(int totalPrice, int benefitsAmount, BenefitContext context) {
+        int giveawayPrice = getGiveawayPrice(context);
+        output.printGiveaway(giveawayPrice);
+        int estimatedAmount = totalPrice - (benefitsAmount - giveawayPrice);
+        output.printEstimatedAmount(estimatedAmount);
     }
 
     private int getGiveawayPrice(BenefitContext context) {
