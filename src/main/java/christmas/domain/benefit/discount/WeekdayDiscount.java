@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class WeekdayDiscount implements BenefitCalculator {
     @Override
     public BenefitInfo calculateBenefit(BenefitContext context) {
-        LocalDate localDate = LocalDate.of(2012, 12, context.getDate());
+        LocalDate localDate = LocalDate.of(2023, 12, context.getDate());
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
         int discount = 0;
