@@ -32,7 +32,7 @@ public class ChristmasPromotion {
         output.printStart();
         Date date = getDate();
         Order order = getOrder();
-        output.printDate(date);
+        output.printDate(date.getDay());
         output.printOrder(order.getOrder());
 
         int totalPrice = processTotalPrice(order);
