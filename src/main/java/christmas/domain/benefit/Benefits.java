@@ -19,6 +19,7 @@ public class Benefits {
     public static Benefits calculateBenefits(BenefitContext context) {
         List<BenefitCalculator> calculators = initCalculators();
         List<BenefitInfo> benefits = calculators.stream()
+                .filter(price -> context.getTotalPrice() >= 10_000)
                 .map(calculator -> calculator.calculateBenefit(context))
                 .filter(benefitInfo -> benefitInfo.getAmount() != 0)
                 .collect(Collectors.toUnmodifiableList());
