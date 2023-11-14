@@ -1,7 +1,7 @@
 package christmas.controller;
 
 import static christmas.constants.Constants.MENU_ITEM_SEPARATOR;
-import static christmas.constants.Constants.QUANTITY_SEPARATOR;
+import static christmas.constants.Constants.MENU_QUANTITY_SEPARATOR;
 
 import christmas.domain.Date;
 import christmas.domain.Order;
@@ -17,6 +17,7 @@ import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ChristmasPromotion {
     private final InputView input;
@@ -29,37 +30,27 @@ public class ChristmasPromotion {
 
     public void run() {
         output.printStart();
-        Date date = processDate();
+        Date date = getDate();
         Order order = processOrder();
+        output.printDate(date);
 
-        int totalPrice = order.getTotalPrice();
-        output.printTotalPrice(totalPrice);
-        output.printGiveaway(Champagne.getGiveaway(totalPrice));
-
+        int totalPrice = processTotalPrice(order);
         BenefitContext context = generateContext(order, date.getDay(), totalPrice);
         int benefitsAmount = processBenefit(context);
-        int giveawayAmount = processGiveaway(context);
-        int estimatedAmount = totalPrice - (benefitsAmount - giveawayAmount);
+
+        int estimatedAmount = totalPrice - (benefitsAmount - getGiveawayPrice(context));
         output.printEstimatedAmount(estimatedAmount);
 
-        String eventBadge = EventBadge.determineBadgeType(benefitsAmount).getBadge();
-        output.printEventBadge(eventBadge);
-    }
-
-    private Date processDate() {
-        Date date = getDate();
-        output.printDate(date);
-        return date;
+        EventBadge eventBadge = EventBadge.determineBadgeType(benefitsAmount);
+        output.printEventBadge(eventBadge.getBadge());
     }
 
     private Date getDate() {
-        while (true) {
-            try {
-                return new Date(input.readDate());
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        return getFromInput(() -> new Date(input.readDate()));
+    }
+
+    private Order getOrder() {
+        return getFromInput(() -> new Order(parseOrder(input.readOrder())));
     }
 
     private Order processOrder() {
@@ -68,22 +59,29 @@ public class ChristmasPromotion {
         return order;
     }
 
-    private Order getOrder() {
-        while (true) {
-            try {
-                String readOrder = input.readOrder();
-                return new Order(parseOrder(readOrder));
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
     private List<Menu> parseOrder(String order) {
         return Arrays.stream(order.split(MENU_ITEM_SEPARATOR))
-                .map(menuItem -> menuItem.split(QUANTITY_SEPARATOR))
-                .map(menu -> new Menu(menu[0], Integer.parseInt(menu[1]), MenuCategory.determineMenuCategory(menu[0])))
+                .map(this::parseMenuItem)
                 .toList();
+    }
+
+    private Menu parseMenuItem(String menuItem) {
+        String[] menuComponents = menuItem.split(MENU_QUANTITY_SEPARATOR);
+        if (menuComponents.length != 2) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+
+        String menuName = menuComponents[0].trim();
+        int quantity = Integer.parseInt(menuComponents[1].trim());
+        MenuCategory category = MenuCategory.determineMenuCategory(menuName);
+        return new Menu(menuName, quantity, category);
+    }
+
+    private int processTotalPrice(Order order) {
+        int totalPrice = order.getTotalPrice();
+        output.printTotalPrice(totalPrice);
+        output.printGiveaway(Champagne.getGiveaway(totalPrice));
+        return totalPrice;
     }
 
     private BenefitContext generateContext(Order order, int date, int totalPrice) {
@@ -101,8 +99,18 @@ public class ChristmasPromotion {
         return benefitsAmount;
     }
 
-    private int processGiveaway(BenefitContext context) {
+    private int getGiveawayPrice(BenefitContext context) {
         Champagne champagne = new Champagne();
         return champagne.calculateBenefit(context).getAmount();
+    }
+
+    private <T> T getFromInput(Supplier<T> supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

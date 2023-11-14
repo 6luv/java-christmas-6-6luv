@@ -10,5 +10,5 @@ public class Constants {
     public static final int MIN_ORDER_QUANTITY = 1;
     public static final int MAX_ORDER_QUANTITY = 20;
     public static final String MENU_ITEM_SEPARATOR = ",";
-    public static final String QUANTITY_SEPARATOR = "-";
+    public static final String MENU_QUANTITY_SEPARATOR = "-";
 }
