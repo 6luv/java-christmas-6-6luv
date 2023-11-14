@@ -1,6 +1,7 @@
 package model.benefit;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import christmas.domain.benefit.BenefitContext;
 import christmas.domain.benefit.BenefitInfo;
@@ -46,5 +47,13 @@ public class benefitsTest {
 
         List<BenefitInfo> expectedBenefits = List.of();
         assertThat(expectedBenefits).usingRecursiveComparison().isEqualTo(benefits);
+    }
+
+    @Test
+    @DisplayName("총 혜택 금액 계산 테스트")
+    void calculateBenefitAmount() {
+        BenefitContext context = new BenefitContext(25, 2, 2, 150000);
+        Benefits benefits = Benefits.calculateBenefits(context);
+        assertEquals(33446, Benefits.calculateBenefitAmount(benefits));
     }
 }
