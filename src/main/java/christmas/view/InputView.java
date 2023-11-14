@@ -2,7 +2,6 @@ package christmas.view;
 
 import static christmas.constants.Constants.EVENT_MONTH;
 import static christmas.constants.Constants.MENU_ITEM_SEPARATOR;
-import static christmas.constants.Constants.QUANTITY_SEPARATOR;
 
 import camp.nextstep.edu.missionutils.Console;
 
