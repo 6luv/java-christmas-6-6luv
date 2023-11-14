@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Benefits {
+    private static final int EVENT_THRESHOLD = 10_000;
+
     private final List<BenefitInfo> benefitInfos;
 
     private Benefits(List<BenefitInfo> benefitInfos) {
@@ -19,7 +21,7 @@ public class Benefits {
     public static Benefits calculateBenefits(BenefitContext context) {
         List<BenefitCalculator> calculators = initCalculators();
         List<BenefitInfo> benefits = calculators.stream()
-                .filter(price -> context.getTotalPrice() >= 10_000)
+                .filter(price -> context.getTotalPrice() >= EVENT_THRESHOLD)
                 .map(calculator -> calculator.calculateBenefit(context))
                 .filter(benefitInfo -> benefitInfo.getAmount() != 0)
                 .collect(Collectors.toUnmodifiableList());

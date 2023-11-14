@@ -1,5 +1,8 @@
 package christmas.controller;
 
+import static christmas.constants.Constants.MENU_ITEM_SEPARATOR;
+import static christmas.constants.Constants.QUANTITY_SEPARATOR;
+
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.badge.EventBadge;
@@ -77,8 +80,8 @@ public class ChristmasPromotion {
     }
 
     private List<Menu> parseOrder(String order) {
-        return Arrays.stream(order.split(","))
-                .map(menuItem -> menuItem.split("-"))
+        return Arrays.stream(order.split(MENU_ITEM_SEPARATOR))
+                .map(menuItem -> menuItem.split(QUANTITY_SEPARATOR))
                 .map(menu -> new Menu(menu[0], Integer.parseInt(menu[1]), MenuCategory.determineMenuCategory(menu[0])))
                 .toList();
     }

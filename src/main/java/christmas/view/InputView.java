@@ -1,5 +1,9 @@
 package christmas.view;
 
+import static christmas.constants.Constants.EVENT_MONTH;
+import static christmas.constants.Constants.MENU_ITEM_SEPARATOR;
+import static christmas.constants.Constants.QUANTITY_SEPARATOR;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
@@ -7,7 +11,7 @@ public class InputView {
     private static final String DATE_NUMERIC_PATTERN = "^[0-9]+$";
 
     public int readDate() {
-        System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
+        System.out.printf("%d월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)\n", EVENT_MONTH);
         String date = Console.readLine();
         validateDate(date);
         return Integer.parseInt(date);
@@ -47,7 +51,7 @@ public class InputView {
     }
 
     private boolean isValidOrderFormat(String order) {
-        for (String menu : order.split(",")) {
+        for (String menu : order.split(MENU_ITEM_SEPARATOR)) {
             if (!menu.matches(ORDER_FORMAT_PATTERN)) {
                 return false;
             }

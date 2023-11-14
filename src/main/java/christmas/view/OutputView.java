@@ -1,5 +1,7 @@
 package christmas.view;
 
+import static christmas.constants.Constants.EVENT_MONTH;
+
 import christmas.domain.Date;
 import christmas.domain.benefit.BenefitInfo;
 import christmas.domain.menu.Menu;
@@ -10,11 +12,11 @@ public class OutputView {
     private static final String BENEFIT_AMOUNT_FORMAT = "-%,d원\n";
 
     public void printStart() {
-        System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
+        System.out.printf("안녕하세요! 우테코 식당 %d월 이벤트 플래너입니다.\n", EVENT_MONTH);
     }
 
     public void printDate(Date date) {
-        System.out.printf("12월 %d월에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n", date.getDay());
+        System.out.printf("%d월 %d월에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n", EVENT_MONTH, date.getDay());
     }
 
     public void printOrder(List<Menu> order) {
@@ -58,7 +60,7 @@ public class OutputView {
     }
 
     public void printEventBadge(String eventBadge) {
-        System.out.println("<12월 이벤트 배지>");
+        System.out.printf("<%d월 이벤트 배지>\n", EVENT_MONTH);
         System.out.println(eventBadge);
     }
 }

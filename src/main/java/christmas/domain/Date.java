@@ -1,9 +1,9 @@
 package christmas.domain;
 
-public class Date {
-    private static final int MIN_DATE = 1;
-    private static final int MAX_DATE = 31;
+import static christmas.constants.Constants.EVENT_END_DATE;
+import static christmas.constants.Constants.EVENT_START_DATE;
 
+public class Date {
     private final int day;
 
     public Date(int day) {
@@ -12,7 +12,7 @@ public class Date {
     }
 
     private void validateRange(int day) {
-        if (MIN_DATE > day || day> MAX_DATE) {
+        if (EVENT_START_DATE > day || day> EVENT_END_DATE) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
     }

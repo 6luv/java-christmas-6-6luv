@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import static christmas.constants.Constants.MAX_ORDER_QUANTITY;
+
 import christmas.domain.menu.Beverage;
 import christmas.domain.menu.Menu;
 import java.util.HashSet;
@@ -7,7 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Order {
-
     private final List<Menu> order;
 
     public Order(List<Menu> order) {
@@ -35,7 +36,7 @@ public class Order {
                 .mapToInt(Menu::getMenuCount)
                 .sum();
 
-        if (menuCount > 20) {
+        if (menuCount > MAX_ORDER_QUANTITY) {
             throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.");
         }
     }
