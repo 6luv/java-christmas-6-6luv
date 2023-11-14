@@ -34,7 +34,7 @@ public class OrderTest {
 
     @Test
     @DisplayName("모든 메뉴가 음료인지 확인 테스트")
-    void isEveryMenuBeverage() {
+    void validateAllOrdersBeverageTest() {
         List<Menu> order = List.of(
                 new Menu("제로콜라", 1, MenuCategory.BEVERAGE),
                 new Menu("레드와인", 2, MenuCategory.BEVERAGE)

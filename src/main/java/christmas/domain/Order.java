@@ -13,7 +13,7 @@ public class Order {
     public Order(List<Menu> order) {
         validateUnique(order);
         validateOrderCount(order);
-        validateAllOrdersAreBeverage(order);
+        validateAllOrdersBeverage(order);
         this.order = order;
     }
 
@@ -24,7 +24,7 @@ public class Order {
         }
     }
 
-    private void validateAllOrdersAreBeverage(List<Menu> order) {
+    private void validateAllOrdersBeverage(List<Menu> order) {
         if (Beverage.isEveryMenuBeverage(order)) {
             throw new IllegalArgumentException("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
         }
