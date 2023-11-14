@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import christmas.domain.menu.Menu;
+import christmas.domain.menu.MenuCategory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -17,7 +18,7 @@ public class MenuTest {
     })
     @DisplayName("메뉴 이름 유효성 성공 테스트")
     void validMenuNameTest(String menuName, int menuCount) {
-        assertDoesNotThrow(() -> new Menu(menuName, menuCount));
+        assertDoesNotThrow(() -> new Menu(menuName, menuCount, MenuCategory.determineMenuCategory(menuName)));
     }
 
     @ParameterizedTest
@@ -29,7 +30,7 @@ public class MenuTest {
     @DisplayName("메뉴 이름 유효성 실패 테스트")
     void invalidMenuNameTest(String menuName, int menuCount) {
         assertThrows(IllegalArgumentException.class,
-                () -> new Menu(menuName, menuCount));
+                () -> new Menu(menuName, menuCount, MenuCategory.determineMenuCategory(menuName)));
     }
 
     @ParameterizedTest
@@ -41,6 +42,6 @@ public class MenuTest {
     @DisplayName("메뉴 개수 검증 실패 테스트")
     void invalidMenuCountTest(String menuName, int menuCount) {
         assertThrows(IllegalArgumentException.class,
-                () -> new Menu(menuName, menuCount));
+                () -> new Menu(menuName, menuCount, MenuCategory.determineMenuCategory(menuName)));
     }
 }
