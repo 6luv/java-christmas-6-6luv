@@ -37,6 +37,7 @@ public class ChristmasPromotion {
 
         int totalPrice = processTotalPrice(order);
         BenefitContext context = generateContext(order, date.getDay(), totalPrice);
+        output.printGiveaway(getGiveawayPrice(context));
         int benefitsAmount = processBenefit(context);
 
         int estimatedAmount = totalPrice - (benefitsAmount - getGiveawayPrice(context));
@@ -75,7 +76,6 @@ public class ChristmasPromotion {
     private int processTotalPrice(Order order) {
         int totalPrice = order.getTotalPrice();
         output.printTotalPrice(totalPrice);
-        output.printGiveaway(Champagne.getGiveaway(totalPrice));
         return totalPrice;
     }
 

@@ -4,10 +4,13 @@ import static christmas.constants.Constants.EVENT_MONTH;
 import static christmas.constants.Constants.LINE_SEPARATOR;
 import static christmas.constants.Constants.MENU_QUANTITY_SEPARATOR;
 import static christmas.constants.Constants.NONE;
+import static christmas.domain.benefit.giveaway.Champagne.GIVEAWAY_NAME;
+import static christmas.domain.benefit.giveaway.Champagne.GIVEAWAY_QUALITY;
 
 import christmas.domain.benefit.BenefitInfo;
 import christmas.domain.menu.Menu;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class OutputView {
     private static final String ITEM_TYPE_FORMAT = "%s";
@@ -37,9 +40,18 @@ public class OutputView {
         System.out.printf(PRICE_FORMAT, totalPrice);
     }
 
-    public void printGiveaway(String giveaway) {
+    public void printGiveaway(int giveawayPrice) {
         System.out.println(LINE_SEPARATOR + "<증정 메뉴>");
-        System.out.println(giveaway);
+
+        Stream.of(giveawayPrice)
+                .filter(price -> price > 0)
+                .map(price -> String.format(ITEM_TYPE_FORMAT + QUANTITY_FORMAT, GIVEAWAY_NAME, GIVEAWAY_QUALITY))
+                .forEach(System.out::printf);
+
+        Stream.of(giveawayPrice)
+                .filter(price -> price == 0)
+                .map(price -> NONE)
+                .forEach(System.out::println);
     }
 
     public void printBenefits(List<BenefitInfo> benefits) {
