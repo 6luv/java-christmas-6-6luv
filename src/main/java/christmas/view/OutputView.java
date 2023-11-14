@@ -3,6 +3,7 @@ package christmas.view;
 import static christmas.constants.Constants.EVENT_MONTH;
 import static christmas.constants.Constants.LINE_SEPARATOR;
 import static christmas.constants.Constants.MENU_QUANTITY_SEPARATOR;
+import static christmas.constants.Constants.NONE;
 
 import christmas.domain.benefit.BenefitInfo;
 import christmas.domain.menu.Menu;
@@ -45,7 +46,7 @@ public class OutputView {
         System.out.println(LINE_SEPARATOR + "<혜택 내역>");
 
         if (benefits.isEmpty()) {
-            System.out.println("없음");
+            System.out.println(NONE);
         }
 
         for (BenefitInfo info : benefits) {

@@ -11,4 +11,5 @@ public class Constants {
     public static final int MAX_ORDER_QUANTITY = 20;
     public static final String MENU_ITEM_SEPARATOR = ",";
     public static final String MENU_QUANTITY_SEPARATOR = "-";
+    public static final String NONE = "없음";
 }

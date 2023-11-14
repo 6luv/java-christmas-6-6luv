@@ -1,5 +1,7 @@
 package christmas.domain.benefit.giveaway;
 
+import static christmas.constants.Constants.NONE;
+
 import christmas.domain.benefit.BenefitCalculator;
 import christmas.domain.benefit.BenefitContext;
 import christmas.domain.benefit.BenefitInfo;
@@ -16,7 +18,7 @@ public class Champagne implements BenefitCalculator {
     @Override
     public BenefitInfo calculateBenefit(BenefitContext context) {
         int price = 0;
-        if (context.getTotalPrice() >= GIVEAWAY_THRESHOLD) {
+        if (isGiveaway(context.getTotalPrice())) {
             price = GIVEAWAY_PRICE;
         }
         return new BenefitInfo(BenefitType.GIVEAWAY, price);
@@ -24,9 +26,13 @@ public class Champagne implements BenefitCalculator {
 
     public static String getGiveaway(int totalPrice) {
         return Stream.of(totalPrice)
-                .filter(price -> price >= 120000)
+                .filter(Champagne::isGiveaway)
                 .map(giveaway -> String.format(GIVEAWAY_FORMAT, GIVEAWAY_NAME, GIVEAWAY_QUALITY))
                 .findFirst()
-                .orElse("없음");
+                .orElse(NONE);
+    }
+
+    private static boolean isGiveaway(int totalPrice) {
+        return totalPrice >= GIVEAWAY_THRESHOLD;
     }
 }
