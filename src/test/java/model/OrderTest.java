@@ -44,4 +44,18 @@ public class OrderTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("총 메뉴 개수가 20개 이상인 경우 테스트")
+    void validateOrderCountTest() {
+        List<Menu> order = List.of(
+                new Menu("양송이수프", 10, MenuCategory.APPETIZER),
+                new Menu("크리스마스파스타", 10, MenuCategory.MAIN_DISH),
+                new Menu("아이스크림", 1, MenuCategory.DESSERT)
+        );
+
+        assertThatThrownBy(() -> new Order(order))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.");
+    }
 }
