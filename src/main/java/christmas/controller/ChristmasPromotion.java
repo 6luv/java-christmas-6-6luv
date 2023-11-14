@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.domain.Date;
 import christmas.domain.Order;
+import christmas.domain.badge.EventBadge;
 import christmas.domain.benefit.BenefitContext;
 import christmas.domain.benefit.Benefits;
 import christmas.domain.benefit.giveaway.Champagne;
@@ -37,6 +38,9 @@ public class ChristmasPromotion {
         int giveawayAmount = processGiveaway(context);
         int estimatedAmount = totalPrice - (benefitsAmount - giveawayAmount);
         output.printEstimatedAmount(estimatedAmount);
+
+        String eventBadge = EventBadge.determineBadgeType(benefitsAmount).getBadge();
+        output.printEventBadge(eventBadge);
     }
 
     private Date processDate() {

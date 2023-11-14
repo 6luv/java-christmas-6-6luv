@@ -54,6 +54,11 @@ public class OutputView {
 
     public void printEstimatedAmount(int estimatedAmount) {
         System.out.println("<할인 후 예상 결제 금액>");
-        System.out.printf("%,d원", estimatedAmount);
+        System.out.printf("%,d원\n", estimatedAmount);
+    }
+
+    public void printEventBadge(String eventBadge) {
+        System.out.println("<12월 이벤트 배지>");
+        System.out.println(eventBadge);
     }
 }
