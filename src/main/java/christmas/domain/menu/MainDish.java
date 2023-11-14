@@ -32,11 +32,6 @@ public enum MainDish implements MenuItem {
     }
 
     @Override
-    public MenuCategory getCategory() {
-        return category;
-    }
-
-    @Override
     public boolean hasMenu(String menuName) {
         return name.contains(menuName);
     }
