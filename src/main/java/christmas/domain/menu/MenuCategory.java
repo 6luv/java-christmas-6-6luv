@@ -1,5 +1,6 @@
 package christmas.domain.menu;
 
+import christmas.constants.ExceptionType;
 import java.util.Arrays;
 
 public enum MenuCategory {
@@ -23,6 +24,6 @@ public enum MenuCategory {
                 .filter(category -> Arrays.stream(category.getMenuClass().getEnumConstants())
                         .anyMatch(menuItem -> menuItem.hasMenu(menuName)))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 유효하지 않은 메뉴입니다. 다시 입력해 주세요."));
+                .orElseThrow(() -> new IllegalArgumentException(ExceptionType.INVALID_ORDER.getMessage()));
     }
 }

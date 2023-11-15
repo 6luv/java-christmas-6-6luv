@@ -4,6 +4,7 @@ import static christmas.constants.Constants.EVENT_MONTH;
 import static christmas.constants.Constants.MENU_ITEM_SEPARATOR;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.constants.ExceptionType;
 
 public class InputView {
     private static final String ORDER_FORMAT_PATTERN = "[가-힣a-zA-Z]+-\\d+";
@@ -18,10 +19,10 @@ public class InputView {
 
     private void validateDate(String date) {
         if (isInputBlank(date)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionType.INVALID_DATE.getMessage());
         }
         if (!isDateNumeric(date)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionType.INVALID_DATE.getMessage());
         }
     }
 
@@ -42,10 +43,10 @@ public class InputView {
 
     private void validateOrder(String order) {
         if (isInputBlank(order)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionType.INVALID_ORDER.getMessage());
         }
         if (!isValidOrderFormat(order)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionType.INVALID_ORDER.getMessage());
         }
     }
 

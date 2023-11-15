@@ -20,7 +20,7 @@ public class Champagne implements BenefitCalculator {
         return new BenefitInfo(BenefitType.GIVEAWAY, price);
     }
 
-    private static boolean isGiveaway(int totalPrice) {
+    private boolean isGiveaway(int totalPrice) {
         return totalPrice >= GIVEAWAY_THRESHOLD;
     }
 }

@@ -3,6 +3,7 @@ package christmas.controller;
 import static christmas.constants.Constants.MENU_ITEM_SEPARATOR;
 import static christmas.constants.Constants.MENU_QUANTITY_SEPARATOR;
 
+import christmas.constants.ExceptionType;
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.badge.EventBadge;
@@ -62,7 +63,7 @@ public class ChristmasPromotion {
     private Menu parseMenuItem(String menuItem) {
         String[] menuComponents = menuItem.split(MENU_QUANTITY_SEPARATOR);
         if (menuComponents.length != 2) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionType.INVALID_ORDER.getMessage());
         }
 
         String menuName = menuComponents[0];

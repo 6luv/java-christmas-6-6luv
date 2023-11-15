@@ -2,6 +2,7 @@ package christmas.domain;
 
 import static christmas.constants.Constants.MAX_ORDER_QUANTITY;
 
+import christmas.constants.ExceptionType;
 import christmas.domain.menu.Beverage;
 import christmas.domain.menu.Menu;
 import java.util.HashSet;
@@ -21,13 +22,13 @@ public class Order {
     private void validateUnique(List<Menu> order) {
         HashSet<Menu> uniqueOrder = new HashSet<>(order);
         if (order.size() != uniqueOrder.size()) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionType.INVALID_ORDER.getMessage());
         }
     }
 
     private void validateAllOrdersBeverage(List<Menu> order) {
         if (Beverage.isEveryMenuBeverage(order)) {
-            throw new IllegalArgumentException("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
+            throw new IllegalArgumentException(ExceptionType.INVALID_BEVERAGE_ONLY_ORDER.getMessage());
         }
     }
 
@@ -37,7 +38,7 @@ public class Order {
                 .sum();
 
         if (menuCount > MAX_ORDER_QUANTITY) {
-            throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.");
+            throw new IllegalArgumentException(ExceptionType.INVALID_ORDER_QUANTITY.getMessage());
         }
     }
 

@@ -3,6 +3,7 @@ package christmas.domain.menu;
 import static christmas.constants.Constants.MAX_ORDER_QUANTITY;
 import static christmas.constants.Constants.MIN_ORDER_QUANTITY;
 
+import christmas.constants.ExceptionType;
 import java.util.Objects;
 
 public class Menu {
@@ -29,7 +30,7 @@ public class Menu {
 
     private void validateMenuCount(int menuCount) {
         if (!isMenuCountValidRange(menuCount)) {
-            throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.");
+            throw new IllegalArgumentException(ExceptionType.INVALID_ORDER_QUANTITY.getMessage());
         }
     }
 
