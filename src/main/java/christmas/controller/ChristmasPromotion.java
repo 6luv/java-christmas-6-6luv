@@ -7,6 +7,7 @@ import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.badge.EventBadge;
 import christmas.domain.benefit.BenefitContext;
+import christmas.domain.benefit.BenefitInfo;
 import christmas.domain.benefit.Benefits;
 import christmas.domain.benefit.giveaway.Champagne;
 import christmas.domain.menu.Dessert;
@@ -28,7 +29,7 @@ public class ChristmasPromotion {
         this.output = output;
     }
 
-    public void run() {
+    public void executeChristmasPromotion() {
         output.printStart();
         Date date = getDate();
         Order order = getOrder();
@@ -37,11 +38,11 @@ public class ChristmasPromotion {
 
         int totalPrice = processTotalPrice(order);
         BenefitContext context = generateContext(order, date.getDate(), totalPrice);
-        int benefitsAmount = processBenefit(context);
+        int giveawayPrice = processGiveaway(context);
+        int benefitsAmount = processBenefits(context);
 
-        processEstimatedAmount(totalPrice, benefitsAmount, context);
-        EventBadge eventBadge = EventBadge.determineBadgeType(benefitsAmount);
-        output.printEventBadge(eventBadge.getBadge());
+        processEstimatedAmount(totalPrice, benefitsAmount, giveawayPrice);
+        processEventBadge(benefitsAmount);
     }
 
     private Date getDate() {
@@ -76,13 +77,21 @@ public class ChristmasPromotion {
         return totalPrice;
     }
 
+    private int processGiveaway(BenefitContext context) {
+        Champagne champagne = new Champagne();
+        BenefitInfo giveaway = champagne.calculateBenefit(context);
+        int giveawayPrice = giveaway.getAmount();
+        output.printGiveaway(giveawayPrice);
+        return giveawayPrice;
+    }
+
     private BenefitContext generateContext(Order order, int date, int totalPrice) {
         int dessertCount = Dessert.calculateDessertCount(order);
         int mainDishCount = MainDish.calculateMainDishCount(order);
         return new BenefitContext(date, dessertCount, mainDishCount, totalPrice);
     }
 
-    private int processBenefit(BenefitContext context) {
+    private int processBenefits(BenefitContext context) {
         Benefits benefits = Benefits.calculateBenefits(context);
         output.printBenefits(benefits.getBenefits());
 
@@ -91,16 +100,14 @@ public class ChristmasPromotion {
         return benefitsAmount;
     }
 
-    private void processEstimatedAmount(int totalPrice, int benefitsAmount, BenefitContext context) {
-        int giveawayPrice = getGiveawayPrice(context);
-        output.printGiveaway(giveawayPrice);
+    private void processEstimatedAmount(int totalPrice, int benefitsAmount, int giveawayPrice) {
         int estimatedAmount = totalPrice - (benefitsAmount - giveawayPrice);
         output.printEstimatedAmount(estimatedAmount);
     }
 
-    private int getGiveawayPrice(BenefitContext context) {
-        Champagne champagne = new Champagne();
-        return champagne.calculateBenefit(context).getAmount();
+    private void processEventBadge(int benefitsAmount) {
+        EventBadge eventBadge = EventBadge.determineBadgeType(benefitsAmount);
+        output.printEventBadge(eventBadge.getBadge());
     }
 
     private <T> T getFromInput(Supplier<T> supplier) {

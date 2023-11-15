@@ -9,6 +9,6 @@ public class Application {
         InputView input = new InputView();
         OutputView output = new OutputView();
         ChristmasPromotion christmasPromotion = new ChristmasPromotion(input, output);
-        christmasPromotion.run();
+        christmasPromotion.executeChristmasPromotion();
     }
 }
