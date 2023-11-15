@@ -7,6 +7,7 @@ import christmas.constants.ExceptionType;
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.badge.EventBadge;
+import christmas.domain.benefit.BenefitCalculator;
 import christmas.domain.benefit.BenefitContext;
 import christmas.domain.benefit.BenefitInfo;
 import christmas.domain.benefit.Benefits;
@@ -23,10 +24,12 @@ import java.util.List;
 public class ChristmasPromotion {
     private final InputView input;
     private final OutputView output;
+    private final List<BenefitCalculator> calculators;
 
-    public ChristmasPromotion(InputView input, OutputView output) {
+    public ChristmasPromotion(InputView input, OutputView output, List<BenefitCalculator> calculators) {
         this.input = input;
         this.output = output;
+        this.calculators = calculators;
     }
 
     public void executeChristmasPromotion() {
@@ -92,7 +95,7 @@ public class ChristmasPromotion {
     }
 
     private int processBenefits(BenefitContext context) {
-        Benefits benefits = Benefits.calculateBenefits(context);
+        Benefits benefits = Benefits.calculateBenefits(context, calculators);
         output.printBenefits(benefits.getBenefits());
 
         int benefitsAmount = Benefits.calculateBenefitAmount(benefits);

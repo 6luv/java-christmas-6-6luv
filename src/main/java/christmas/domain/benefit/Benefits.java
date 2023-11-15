@@ -1,11 +1,5 @@
 package christmas.domain.benefit;
 
-import christmas.domain.benefit.discount.DdayDiscount;
-import christmas.domain.benefit.discount.SpecialDiscount;
-import christmas.domain.benefit.discount.WeekdayDiscount;
-import christmas.domain.benefit.discount.WeekendDiscount;
-import christmas.domain.benefit.giveaway.Champagne;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,24 +12,13 @@ public class Benefits {
         this.benefitInfos = benefitInfos;
     }
 
-    public static Benefits calculateBenefits(BenefitContext context) {
-        List<BenefitCalculator> calculators = initCalculators();
+    public static Benefits calculateBenefits(BenefitContext context, List<BenefitCalculator> calculators) {
         List<BenefitInfo> benefits = calculators.stream()
                 .filter(price -> context.getTotalPrice() >= EVENT_THRESHOLD)
                 .map(calculator -> calculator.calculateBenefit(context))
                 .filter(benefitInfo -> benefitInfo.getAmount() != 0)
                 .collect(Collectors.toUnmodifiableList());
         return new Benefits(benefits);
-    }
-
-    private static List<BenefitCalculator> initCalculators() {
-        return new ArrayList<>(List.of(
-                new DdayDiscount(),
-                new WeekdayDiscount(),
-                new WeekendDiscount(),
-                new SpecialDiscount(),
-                new Champagne()
-        ));
     }
 
     public static int calculateBenefitAmount(Benefits benefits) {
