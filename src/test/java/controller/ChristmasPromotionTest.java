@@ -5,8 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import christmas.Application;
+import christmas.constants.ExceptionType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class ChristmasPromotionTest extends NsTest {
     @Test
@@ -36,6 +39,16 @@ public class ChristmasPromotionTest extends NsTest {
                     "<12월 이벤트 배지>",
                     "별"
             );
+        });
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a", " ", "z"})
+    @DisplayName("날짜 예외 테스트")
+    void invalidDateTest(String date) {
+        assertSimpleTest(() -> {
+            runException(date);
+            assertThat(output()).contains(ExceptionType.INVALID_DATE.getMessage());
         });
     }
 
