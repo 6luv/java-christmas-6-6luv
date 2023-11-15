@@ -6,9 +6,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import christmas.Application;
 import christmas.constants.ExceptionType;
+import christmas.domain.menu.Menu;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class ChristmasPromotionTest extends NsTest {
@@ -51,6 +54,21 @@ public class ChristmasPromotionTest extends NsTest {
             assertThat(output()).contains(ExceptionType.INVALID_DATE.getMessage());
         });
     }
+
+    @Test
+    @DisplayName("주문 문자열 파싱 테스트")
+    void parseOrderTest() {
+        assertSimpleTest(() -> {
+            run("3", "해산물파스타-2,레드와인-1,초코케이크-1");
+            assertThat(output()).contains(
+                    "<주문 메뉴>",
+                    "해산물파스타 2개",
+                    "레드와인 1개",
+                    "초코케이크 1개"
+            );
+        });
+    }
+
 
     @Override
     protected void runMain() {
