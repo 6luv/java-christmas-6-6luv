@@ -6,12 +6,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import christmas.Application;
 import christmas.constants.ExceptionType;
-import christmas.domain.menu.Menu;
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class ChristmasPromotionTest extends NsTest {
@@ -69,6 +66,17 @@ public class ChristmasPromotionTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("이벤트 배지 없음 테스트")
+    void eventBadgeTest() {
+        assertSimpleTest(() -> {
+            run("1", "티본스테이크-1");
+            assertThat(output()).contains(
+                    "<12월 이벤트 배지>",
+                    "없음"
+            );
+        });
+    }
 
     @Override
     protected void runMain() {
