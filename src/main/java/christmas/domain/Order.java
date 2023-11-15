@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import static christmas.constants.Constants.MAX_ORDER_QUANTITY;
+import static christmas.constants.OrderConstants.MAX_QUANTITY;
 
 import christmas.constants.ExceptionType;
 import christmas.domain.menu.Beverage;
@@ -37,7 +37,7 @@ public class Order {
                 .mapToInt(Menu::getMenuCount)
                 .sum();
 
-        if (menuCount > MAX_ORDER_QUANTITY) {
+        if (menuCount > MAX_QUANTITY.getValue()) {
             throw new IllegalArgumentException(ExceptionType.INVALID_ORDER_QUANTITY.getMessage());
         }
     }

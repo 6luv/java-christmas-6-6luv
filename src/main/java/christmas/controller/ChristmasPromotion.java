@@ -1,7 +1,7 @@
 package christmas.controller;
 
-import static christmas.constants.Constants.MENU_ITEM_SEPARATOR;
-import static christmas.constants.Constants.MENU_QUANTITY_SEPARATOR;
+import static christmas.constants.SeparatorConstants.MENU_ITEM_SEPARATOR;
+import static christmas.constants.SeparatorConstants.MENU_QUANTITY_SEPARATOR;
 
 import christmas.constants.ExceptionType;
 import christmas.domain.Date;
@@ -54,13 +54,13 @@ public class ChristmasPromotion {
     }
 
     private List<Menu> parseOrder(String order) {
-        return Arrays.stream(order.split(MENU_ITEM_SEPARATOR))
+        return Arrays.stream(order.split(MENU_ITEM_SEPARATOR.getValue()))
                 .map(this::parseMenuItem)
                 .toList();
     }
 
     private Menu parseMenuItem(String menuItem) {
-        String[] menuComponents = menuItem.split(MENU_QUANTITY_SEPARATOR);
+        String[] menuComponents = menuItem.split(MENU_QUANTITY_SEPARATOR.getValue());
         if (menuComponents.length != 2) {
             throw new IllegalArgumentException(ExceptionType.INVALID_ORDER.getMessage());
         }

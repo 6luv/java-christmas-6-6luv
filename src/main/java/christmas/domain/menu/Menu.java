@@ -1,7 +1,7 @@
 package christmas.domain.menu;
 
-import static christmas.constants.Constants.MAX_ORDER_QUANTITY;
-import static christmas.constants.Constants.MIN_ORDER_QUANTITY;
+import static christmas.constants.OrderConstants.MAX_QUANTITY;
+import static christmas.constants.OrderConstants.MIN_QUANTITY;
 
 import christmas.constants.ExceptionType;
 import java.util.Objects;
@@ -35,7 +35,7 @@ public class Menu {
     }
 
     private boolean isMenuCountValidRange(int menuCount) {
-        return MIN_ORDER_QUANTITY <= menuCount && menuCount <= MAX_ORDER_QUANTITY;
+        return MIN_QUANTITY.getValue() <= menuCount && menuCount <= MAX_QUANTITY.getValue();
     }
 
     public String getMenuName() {

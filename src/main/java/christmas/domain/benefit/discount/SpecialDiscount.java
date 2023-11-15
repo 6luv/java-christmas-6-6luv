@@ -1,8 +1,8 @@
 package christmas.domain.benefit.discount;
 
-import static christmas.constants.Constants.CHRISTMAS_DDAY;
-import static christmas.constants.Constants.EVENT_MONTH;
-import static christmas.constants.Constants.EVENT_YEAR;
+import static christmas.constants.EventConstants.CHRISTMAS_DDAY;
+import static christmas.constants.EventConstants.EVENT_MONTH;
+import static christmas.constants.EventConstants.EVENT_YEAR;
 
 import christmas.domain.benefit.BenefitCalculator;
 import christmas.domain.benefit.BenefitContext;
@@ -16,7 +16,7 @@ public class SpecialDiscount implements BenefitCalculator {
 
     @Override
     public BenefitInfo calculateBenefit(BenefitContext context) {
-        LocalDate localDate = LocalDate.of(EVENT_YEAR, EVENT_MONTH, context.getDate());
+        LocalDate localDate = LocalDate.of(EVENT_YEAR.getValue(), EVENT_MONTH.getValue(), context.getDate());
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
         int discount = 0;
@@ -32,6 +32,6 @@ public class SpecialDiscount implements BenefitCalculator {
     }
 
     private boolean isChristmas(int date) {
-        return date == CHRISTMAS_DDAY;
+        return date == CHRISTMAS_DDAY.getValue();
     }
 }

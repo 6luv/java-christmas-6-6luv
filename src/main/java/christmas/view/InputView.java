@@ -1,8 +1,7 @@
 package christmas.view;
 
-import static christmas.constants.Constants.EVENT_MONTH;
-import static christmas.constants.Constants.LINE_SEPARATOR;
-import static christmas.constants.Constants.MENU_ITEM_SEPARATOR;
+import static christmas.constants.EventConstants.EVENT_MONTH;
+import static christmas.constants.SeparatorConstants.MENU_ITEM_SEPARATOR;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.constants.ExceptionType;
@@ -10,9 +9,10 @@ import java.util.function.Supplier;
 
 public class InputView {
     private static final String ORDER_FORMAT_PATTERN = "[가-힣a-zA-Z]+-\\d+";
+    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     public int readDate() {
-        System.out.printf("%d월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)" + LINE_SEPARATOR, EVENT_MONTH);
+        System.out.printf("%d월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)" + LINE_SEPARATOR, EVENT_MONTH.getValue());
         String date = Console.readLine();
         validateDate(date);
         return parseInt(date);
@@ -53,7 +53,7 @@ public class InputView {
     }
 
     private boolean isValidOrderFormat(String order) {
-        for (String menu : order.split(MENU_ITEM_SEPARATOR)) {
+        for (String menu : order.split(MENU_ITEM_SEPARATOR.getValue())) {
             if (!menu.matches(ORDER_FORMAT_PATTERN)) {
                 return false;
             }
