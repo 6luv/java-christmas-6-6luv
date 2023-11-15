@@ -116,7 +116,7 @@ public class ChristmasPromotion {
             try {
                 return supplier.get();
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                output.printErrorMessage(e.getMessage());
             }
         }
     }
