@@ -39,12 +39,12 @@ public class ChristmasPromotion {
         output.printDate(date.getDate());
         output.printOrder(order.getOrder());
 
-        int totalPrice = processTotalPrice(order);
-        BenefitContext context = generateContext(order, date.getDate(), totalPrice);
+        int totalAmount = processTotalAmount(order);
+        BenefitContext context = generateContext(order, date.getDate(), totalAmount);
         int giveawayPrice = processGiveaway(context);
         int benefitsAmount = processBenefits(context);
 
-        processEstimatedAmount(totalPrice, benefitsAmount, giveawayPrice);
+        processEstimatedAmount(totalAmount, benefitsAmount, giveawayPrice);
         processEventBadge(benefitsAmount);
     }
 
@@ -74,10 +74,10 @@ public class ChristmasPromotion {
         return new Menu(menuName, quantity, category);
     }
 
-    private int processTotalPrice(Order order) {
-        int totalPrice = order.getTotalPrice();
-        output.printTotalPrice(totalPrice);
-        return totalPrice;
+    private int processTotalAmount(Order order) {
+        int totalAmount = order.getTotalAmount();
+        output.printTotalAmount(totalAmount);
+        return totalAmount;
     }
 
     private int processGiveaway(BenefitContext context) {
@@ -88,23 +88,23 @@ public class ChristmasPromotion {
         return giveawayPrice;
     }
 
-    private BenefitContext generateContext(Order order, int date, int totalPrice) {
+    private BenefitContext generateContext(Order order, int date, int totalAmount) {
         int dessertCount = Dessert.calculateDessertCount(order);
         int mainDishCount = MainDish.calculateMainDishCount(order);
-        return new BenefitContext(date, dessertCount, mainDishCount, totalPrice);
+        return new BenefitContext(date, dessertCount, mainDishCount, totalAmount);
     }
 
     private int processBenefits(BenefitContext context) {
         Benefits benefits = Benefits.calculateBenefits(context, calculators);
         output.printBenefits(benefits.getBenefits());
 
-        int benefitsAmount = Benefits.calculateBenefitAmount(benefits);
+        int benefitsAmount = Benefits.calculateBenefitsAmount(benefits);
         output.printBenefitAmount(benefitsAmount);
         return benefitsAmount;
     }
 
-    private void processEstimatedAmount(int totalPrice, int benefitsAmount, int giveawayPrice) {
-        int estimatedAmount = totalPrice - (benefitsAmount - giveawayPrice);
+    private void processEstimatedAmount(int totalAmount, int benefitsAmount, int giveawayPrice) {
+        int estimatedAmount = totalAmount - (benefitsAmount - giveawayPrice);
         output.printEstimatedAmount(estimatedAmount);
     }
 

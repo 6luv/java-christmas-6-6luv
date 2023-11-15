@@ -42,7 +42,7 @@ public class Order {
         }
     }
 
-    public int getTotalPrice() {
+    public int getTotalAmount() {
         return order.stream()
                 .mapToInt(Menu::getMenuPrice)
                 .sum();

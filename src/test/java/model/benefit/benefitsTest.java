@@ -35,7 +35,7 @@ public class benefitsTest {
     @Test
     @DisplayName("혜택 내역 테스트 (크리스마스 디데이 할인, 평일 할인, 증정 이벤트)")
     void calculateBenefits_2() {
-        BenefitContext context = new BenefitContext(25, 2, 2, 150000);
+        BenefitContext context = new BenefitContext(25, 2, 2, 150_000);
         List<BenefitInfo> benefits = Benefits.calculateBenefits(context, calculators).getBenefits();
 
         List<BenefitInfo> expectedBenefits = List.of(
@@ -50,7 +50,7 @@ public class benefitsTest {
     @Test
     @DisplayName("혜택 내역 테스트 (주말 할인)")
     void calculateBenefits() {
-        BenefitContext context = new BenefitContext(29, 1, 2, 30000);
+        BenefitContext context = new BenefitContext(29, 1, 2, 30_000);
         List<BenefitInfo> benefits = Benefits.calculateBenefits(context, calculators).getBenefits();
 
         List<BenefitInfo> expectedBenefits = List.of(
@@ -62,7 +62,7 @@ public class benefitsTest {
     @Test
     @DisplayName("혜택 내역 테스트 (총 주문 금액 10,000원 이하)")
     void calculateBenefitsNoBenefit() {
-        BenefitContext context = new BenefitContext(25, 0, 1, 8500);
+        BenefitContext context = new BenefitContext(25, 0, 1, 8_500);
         List<BenefitInfo> benefits = Benefits.calculateBenefits(context, calculators).getBenefits();
 
         List<BenefitInfo> expectedBenefits = List.of();
@@ -72,8 +72,8 @@ public class benefitsTest {
     @Test
     @DisplayName("총 혜택 금액 계산 테스트")
     void calculateBenefitAmount() {
-        BenefitContext context = new BenefitContext(25, 2, 2, 150000);
+        BenefitContext context = new BenefitContext(25, 2, 2, 150_000);
         Benefits benefits = Benefits.calculateBenefits(context, calculators);
-        assertEquals(33_446, Benefits.calculateBenefitAmount(benefits));
+        assertEquals(33_446, Benefits.calculateBenefitsAmount(benefits));
     }
 }

@@ -16,8 +16,8 @@ public class EventBadgeTest {
             "100000, 산타"
     })
     @DisplayName("이벤트 배지 부여 테스트")
-    void determineBadgeTypeTest(int benefitAmount, String expectedBadgeType) {
-        EventBadge eventBadge = EventBadge.determineBadgeType(benefitAmount);
+    void determineBadgeTypeTest(int benefitsAmount, String expectedBadgeType) {
+        EventBadge eventBadge = EventBadge.determineBadgeType(benefitsAmount);
         assertThat(expectedBadgeType).isEqualTo(eventBadge.getBadge());
     }
 }

@@ -14,13 +14,13 @@ public class Champagne implements BenefitCalculator {
     @Override
     public BenefitInfo calculateBenefit(BenefitContext context) {
         int price = 0;
-        if (isGiveaway(context.getTotalPrice())) {
+        if (isGiveaway(context.getTotalAmount())) {
             price = GIVEAWAY_PRICE;
         }
         return new BenefitInfo(BenefitType.GIVEAWAY, price);
     }
 
-    private boolean isGiveaway(int totalPrice) {
-        return totalPrice >= GIVEAWAY_THRESHOLD;
+    private boolean isGiveaway(int totalAmount) {
+        return totalAmount >= GIVEAWAY_THRESHOLD;
     }
 }

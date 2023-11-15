@@ -16,8 +16,8 @@ public class ChampagneTest {
             "100_000, 0"
     })
     @DisplayName("샴페인 증정 이벤트 테스트")
-    void calculateBenefitTest(int totalPrice, int expectedPrice) {
-        BenefitContext context = new BenefitContext(1, 0, 0, totalPrice);
+    void calculateBenefitTest(int totalAmount, int expectedPrice) {
+        BenefitContext context = new BenefitContext(1, 0, 0, totalAmount);
         Champagne champagne = new Champagne();
 
         BenefitInfo info = champagne.calculateBenefit(context);

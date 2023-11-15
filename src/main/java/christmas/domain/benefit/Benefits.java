@@ -14,14 +14,14 @@ public class Benefits {
 
     public static Benefits calculateBenefits(BenefitContext context, List<BenefitCalculator> calculators) {
         List<BenefitInfo> benefits = calculators.stream()
-                .filter(price -> context.getTotalPrice() >= EVENT_THRESHOLD)
+                .filter(amount -> context.getTotalAmount() >= EVENT_THRESHOLD)
                 .map(calculator -> calculator.calculateBenefit(context))
                 .filter(benefitInfo -> benefitInfo.getAmount() != 0)
                 .collect(Collectors.toUnmodifiableList());
         return new Benefits(benefits);
     }
 
-    public static int calculateBenefitAmount(Benefits benefits) {
+    public static int calculateBenefitsAmount(Benefits benefits) {
         return benefits.getBenefits()
                 .stream()
                 .mapToInt(BenefitInfo::getAmount)

@@ -15,7 +15,7 @@ public class OutputView {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String ITEM_TYPE_FORMAT = "%s";
     private static final String QUANTITY_FORMAT = " %d개" + LINE_SEPARATOR;
-    private static final String BENEFIT_TYPE_PRICE_SEPARATOR = ": ";
+    private static final String BENEFIT_TYPE_AMOUNT_SEPARATOR = ": ";
     private static final String DISCOUNT_PRICE_PREFIX = "-";
     private static final String PRICE_FORMAT = "%,d원" + LINE_SEPARATOR;
 
@@ -35,9 +35,9 @@ public class OutputView {
         }
     }
 
-    public void printTotalPrice(int totalPrice) {
+    public void printTotalAmount(int totalAmount) {
         System.out.println(LINE_SEPARATOR + "<할인 전 총주문 금액>");
-        System.out.printf(PRICE_FORMAT, totalPrice);
+        System.out.printf(PRICE_FORMAT, totalAmount);
     }
 
     public void printGiveaway(int giveawayPrice) {
@@ -63,7 +63,7 @@ public class OutputView {
 
         for (BenefitInfo info : benefits) {
             System.out.printf(ITEM_TYPE_FORMAT, info.getBenefitType().getDescription());
-            System.out.printf(BENEFIT_TYPE_PRICE_SEPARATOR + DISCOUNT_PRICE_PREFIX);
+            System.out.printf(BENEFIT_TYPE_AMOUNT_SEPARATOR + DISCOUNT_PRICE_PREFIX);
             System.out.printf(PRICE_FORMAT, info.getAmount());
         }
     }
