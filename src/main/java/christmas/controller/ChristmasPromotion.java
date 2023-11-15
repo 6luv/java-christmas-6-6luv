@@ -19,7 +19,6 @@ import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 
 public class ChristmasPromotion {
     private final InputView input;
@@ -47,11 +46,11 @@ public class ChristmasPromotion {
     }
 
     private Date getDate() {
-        return getFromInput(() -> new Date(input.readDate()));
+        return input.getFromInput(() -> new Date(input.readDate()));
     }
 
     private Order getOrder() {
-        return getFromInput(() -> new Order(parseOrder(input.readOrder())));
+        return input.getFromInput(() -> new Order(parseOrder(input.readOrder())));
     }
 
     private List<Menu> parseOrder(String order) {
@@ -109,15 +108,5 @@ public class ChristmasPromotion {
     private void processEventBadge(int benefitsAmount) {
         EventBadge eventBadge = EventBadge.determineBadgeType(benefitsAmount);
         output.printEventBadge(eventBadge.getBadge());
-    }
-
-    private <T> T getFromInput(Supplier<T> supplier) {
-        while (true) {
-            try {
-                return supplier.get();
-            } catch (IllegalArgumentException e) {
-                output.printErrorMessage(e.getMessage());
-            }
-        }
     }
 }

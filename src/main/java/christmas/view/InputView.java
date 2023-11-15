@@ -6,6 +6,7 @@ import static christmas.constants.Constants.MENU_ITEM_SEPARATOR;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.constants.ExceptionType;
+import java.util.function.Supplier;
 
 public class InputView {
     private static final String ORDER_FORMAT_PATTERN = "[가-힣a-zA-Z]+-\\d+";
@@ -58,5 +59,15 @@ public class InputView {
             }
         }
         return true;
+    }
+
+    public <T> T getFromInput(Supplier<T> supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
