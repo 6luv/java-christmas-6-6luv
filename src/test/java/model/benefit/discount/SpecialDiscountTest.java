@@ -13,10 +13,10 @@ public class SpecialDiscountTest {
     @ParameterizedTest
     @CsvSource({
             "1, 0",
-            "3, 1000",
-            "10, 1000",
-            "24, 1000",
-            "25, 1000",
+            "3, 1_000",
+            "10, 1_000",
+            "24, 1_000",
+            "25, 1_000",
             "26, 0"
     })
     @DisplayName("특별 할인 테스트")

@@ -12,9 +12,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class DdayDiscountTest {
     @ParameterizedTest
     @CsvSource({
-            "1, 1000",
-            "10, 1900",
-            "25, 3400",
+            "1, 1_000",
+            "10, 1_900",
+            "25, 3_400",
             "26, 0"
     })
     @DisplayName("크리스마스 디데이 할인 테스트")

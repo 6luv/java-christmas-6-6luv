@@ -1,8 +1,10 @@
 package model;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import christmas.constants.ExceptionType;
 import christmas.domain.Date;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,8 +19,9 @@ public class DateTest {
     })
     @DisplayName("날짜 범위 실패 테스트")
     void invalidDateTest(int date) {
-        assertThrows(IllegalArgumentException.class,
-                () -> new Date(date));
+        assertThatThrownBy(() -> new Date(date))
+                .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage(ExceptionType.INVALID_DATE.getMessage());
     }
 
     @ParameterizedTest

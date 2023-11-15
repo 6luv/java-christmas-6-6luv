@@ -12,9 +12,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class WeekdayDiscountTest {
     @ParameterizedTest
     @CsvSource({
-            "3, 3, 6069",
-            "5, 2, 4046",
-            "7, 1, 2023",
+            "3, 3, 6_069",
+            "5, 2, 4_046",
+            "7, 1, 2_023",
             "8, 1, 0"
     })
     @DisplayName("평일 할인 테스트")

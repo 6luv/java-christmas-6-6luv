@@ -3,6 +3,7 @@ package model.menu;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import christmas.constants.ExceptionType;
 import christmas.domain.menu.MenuCategory;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -39,6 +40,6 @@ public class MenuCategoryTest {
     void determineCategoryTest(String menuName) {
         assertThatThrownBy(() -> MenuCategory.determineMenuCategory(menuName))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 유효하지 않은 메뉴입니다. 다시 입력해 주세요.");
+                .hasMessage(ExceptionType.INVALID_ORDER.getMessage());
     }
 }

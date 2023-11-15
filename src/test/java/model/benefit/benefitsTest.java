@@ -19,10 +19,10 @@ public class benefitsTest {
         List<BenefitInfo> benefits = Benefits.calculateBenefits(context).getBenefits();
 
         List<BenefitInfo> expectedBenefits = List.of(
-                new BenefitInfo(BenefitType.D_DAY, 3400),
-                new BenefitInfo(BenefitType.WEEKDAY, 4046),
-                new BenefitInfo(BenefitType.SPECIAL, 1000),
-                new BenefitInfo(BenefitType.GIVEAWAY, 25000)
+                new BenefitInfo(BenefitType.D_DAY, 3_400),
+                new BenefitInfo(BenefitType.WEEKDAY, 4_046),
+                new BenefitInfo(BenefitType.SPECIAL, 1_000),
+                new BenefitInfo(BenefitType.GIVEAWAY, 25_000)
         );
         assertThat(expectedBenefits).usingRecursiveComparison().isEqualTo(benefits);
     }
@@ -34,7 +34,7 @@ public class benefitsTest {
         List<BenefitInfo> benefits = Benefits.calculateBenefits(context).getBenefits();
 
         List<BenefitInfo> expectedBenefits = List.of(
-                new BenefitInfo(BenefitType.WEEKEND, 4046)
+                new BenefitInfo(BenefitType.WEEKEND, 4_046)
         );
         assertThat(expectedBenefits).usingRecursiveComparison().isEqualTo(benefits);
     }
@@ -54,6 +54,6 @@ public class benefitsTest {
     void calculateBenefitAmount() {
         BenefitContext context = new BenefitContext(25, 2, 2, 150000);
         Benefits benefits = Benefits.calculateBenefits(context);
-        assertEquals(33446, Benefits.calculateBenefitAmount(benefits));
+        assertEquals(33_446, Benefits.calculateBenefitAmount(benefits));
     }
 }
