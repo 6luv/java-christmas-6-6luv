@@ -1,6 +1,7 @@
 package christmas.view;
 
 import static christmas.constants.Constants.EVENT_MONTH;
+import static christmas.constants.Constants.LINE_SEPARATOR;
 import static christmas.constants.Constants.MENU_ITEM_SEPARATOR;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -8,20 +9,16 @@ import christmas.constants.ExceptionType;
 
 public class InputView {
     private static final String ORDER_FORMAT_PATTERN = "[가-힣a-zA-Z]+-\\d+";
-    private static final String DATE_NUMERIC_PATTERN = "^[0-9]+$";
 
     public int readDate() {
-        System.out.printf("%d월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)\n", EVENT_MONTH);
+        System.out.printf("%d월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)" + LINE_SEPARATOR, EVENT_MONTH);
         String date = Console.readLine();
         validateDate(date);
-        return Integer.parseInt(date);
+        return parseInt(date);
     }
 
     private void validateDate(String date) {
         if (isInputBlank(date)) {
-            throw new IllegalArgumentException(ExceptionType.INVALID_DATE.getMessage());
-        }
-        if (!isDateNumeric(date)) {
             throw new IllegalArgumentException(ExceptionType.INVALID_DATE.getMessage());
         }
     }
@@ -30,8 +27,12 @@ public class InputView {
         return input.trim().isBlank();
     }
 
-    private boolean isDateNumeric(String date) {
-        return date.matches(DATE_NUMERIC_PATTERN);
+    private int parseInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch(NumberFormatException e) {
+            throw new IllegalArgumentException(ExceptionType.INVALID_DATE.getMessage());
+        }
     }
 
     public String readOrder() {
