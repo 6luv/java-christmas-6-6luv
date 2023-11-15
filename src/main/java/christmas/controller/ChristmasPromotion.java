@@ -32,11 +32,11 @@ public class ChristmasPromotion {
         output.printStart();
         Date date = getDate();
         Order order = getOrder();
-        output.printDate(date.getDay());
+        output.printDate(date.getDate());
         output.printOrder(order.getOrder());
 
         int totalPrice = processTotalPrice(order);
-        BenefitContext context = generateContext(order, date.getDay(), totalPrice);
+        BenefitContext context = generateContext(order, date.getDate(), totalPrice);
         int benefitsAmount = processBenefit(context);
 
         processEstimatedAmount(totalPrice, benefitsAmount, context);
