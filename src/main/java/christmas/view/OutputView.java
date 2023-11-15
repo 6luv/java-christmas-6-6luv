@@ -85,8 +85,4 @@ public class OutputView {
         System.out.printf(LINE_SEPARATOR + "<%d월 이벤트 배지>" + LINE_SEPARATOR, EVENT_MONTH);
         System.out.println(eventBadge);
     }
-
-    public void printErrorMessage(String message) {
-        System.out.println(message);
-    }
 }
